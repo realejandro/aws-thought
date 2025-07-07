@@ -1,0 +1,19 @@
+{
+  "name": "aws-thoughts",
+  "version": "1.0.0",
+  "description": "practice app",
+  "license": "ISC",
+  "author": "al_cabrera",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/server.js"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.842.0",
+    "aws-sdk": "^2.1692.0",
+    "express": "^5.1.0",
+    "uuid": "^11.1.0"
+  }
+}
