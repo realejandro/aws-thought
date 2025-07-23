@@ -1,0 +1,4 @@
+
+const getImages = (req, res) => {
+    
+}
