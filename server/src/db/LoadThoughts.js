@@ -3,6 +3,10 @@ import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
 import { PutCommand, DynamoDBDocumentClient } from '@aws-sdk/lib-dynamodb';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import dotenv from 'dotenv';
+
+dotenv.config();
+
 
 // Get __dirname in ES modules
 const __filename = fileURLToPath(import.meta.url);
@@ -13,16 +17,17 @@ const filePath = path.join(__dirname, '../seed/users.json');
 const allUsers = JSON.parse(await readFile(filePath, 'utf8'));
 
 // Initialize DynamoDB client
-const client = new DynamoDBClient({ region: 'us-east-2' });
+const client = new DynamoDBClient({
+    region: process.env.AWS_REGION || "us-east-1",
+  });
 const ddbDocClient = DynamoDBDocumentClient.from(client);
 
 console.log("Importing thoughts into DynamoDB. Please wait.");
 
 for (const user of allUsers) {
   const params = new PutCommand({
-    TableName: "Thought",
+    TableName: "Thoughts",
     Item: {
-      Thought: user.thought,
       username: user.username,
       createdAt: user.createdAt,
       thought: user.thought

@@ -1,21 +1,30 @@
 import { CreateTableCommand, DynamoDBClient } from "@aws-sdk/client-dynamodb";
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 export const main = async () => {
-   const client = new DynamoDBClient({}); 
+  const client = new DynamoDBClient({
+    region: process.env.AWS_REGION || "us-east-1",
+    credentials: {
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+  }
+  }); 
   const command = new CreateTableCommand({
-    TableName: "Thought",
+    TableName: "Thoughts",
     // For more information about data types,
     // see https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.NamingRulesDataTypes.html#HowItWorks.DataTypes and
     // https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Programming.LowLevelAPI.html#Programming.LowLevelAPI.DataTypeDescriptors
     AttributeDefinitions: [
       {
-        AttributeName: "Thought",
+        AttributeName: "username",
         AttributeType: "S",
       },
     ],
     KeySchema: [
       {
-        AttributeName: "Thought",
+        AttributeName: "username",
         KeyType: "HASH",
       },
     ],

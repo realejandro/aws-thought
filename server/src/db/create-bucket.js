@@ -1,19 +1,19 @@
 import { S3Client, CreateBucketCommand } from "@aws-sdk/client-s3";
 import { v4 as uuidv4 } from 'uuid';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const s3Client = new S3Client({
-  region: "us-east-1",
+  region: process.env.AWS_REGION || 'us-east-1',
   // Optionally configure credentials here or use default AWS CLI profile
-  // credentials: {
-  //   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-  //   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-  // },
 });
 
-const bucketName = 'deep-thoughts-demo-bucket-' + uuidv4();
+
+const bucketName = 'user-images-' + Date.now();
 
 const bucketParams = {
-  Bucket: bucketName,
+  Bucket: bucketName
 };
 
 async function createBucket() {
@@ -24,6 +24,7 @@ async function createBucket() {
     console.log("📦 Location:", response.Location || "Created in region");
   } catch (err) {
     console.error("❌ Error creating bucket:", err.message);
+    console.log(err)
   }
 }
 

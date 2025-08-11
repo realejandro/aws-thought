@@ -6,6 +6,7 @@ const ThoughtList = ({ thoughts, title }) => {
   if (!thoughts.length) {
     return <h3>No Thoughts Yet</h3>;
   }
+  console.log(thoughts + "  aquiiiii")
   return (
     <div>
       <h3>{title}</h3>
@@ -21,12 +22,26 @@ const ThoughtList = ({ thoughts, title }) => {
                 {thought.username}'s thought on {new Date(parseInt(thought.createdAt)).toString()}
               </Link>{' '}
             </p>
-            {thought.thought &&
+            { thought.thought &&
               <p className="px-2 mt-2">
                 {thought.thought}
               </p>
             }
-            
+
+            {/*Adding image to the card*/}
+
+            { thought.image && (
+                <p className="px-2">
+                  <img
+                    className="mt-3 ml-4 thought-image"
+                    src={thought.image}
+                    alt="S3 bucket response"
+                  />
+                </p>
+            )}
+            {
+              console.log(thought.image)
+            }
           </div>
         ))}
     </div>

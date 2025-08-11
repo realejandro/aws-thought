@@ -8,14 +8,20 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node src/server.js"
+    "start": "node src/server.js",
+    "watch": "nodemon src/server.js",
+    "test-tables": "node src/db/ListTables.js"
   },
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.840.0",
     "@aws-sdk/client-s3": "^3.842.0",
     "@aws-sdk/lib-dynamodb": "^3.840.0",
+    "@aws-sdk/lib-storage": "^3.863.0",
     "aws-sdk": "^2.1692.0",
+    "dotenv": "^17.2.1",
     "express": "^5.1.0",
+    "multer": "^2.0.2",
+    "nodemon": "^3.1.10",
     "uuid": "^11.1.0"
   }
 }
